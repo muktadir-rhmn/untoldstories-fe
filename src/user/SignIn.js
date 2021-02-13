@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import {userEndpoints} from "./UserEndpoints";
 import userManager from "./UserManager";
+import ProcessButton from "../controls/ProcessButton";
 
 class SignIn extends React.Component {
     constructor(props)  {
@@ -24,13 +25,6 @@ class SignIn extends React.Component {
         if (userManager.isSignedIn()) {
             window.location.href = "/";
             return "";
-        }
-
-        let signInButton;
-        if (this.state.isSignInProcessing) {
-            signInButton = <Button variant="info" disabled><Spinner animation="border" size="sm"/> Sign In</Button>;
-        } else {
-            signInButton = <Button variant="info" onClick={event => this.signIn()}>Sign In</Button>;
         }
 
         return (
@@ -61,7 +55,7 @@ class SignIn extends React.Component {
                                     {this.state.password.error}
                                 </Form.Text>
                             </Form.Group>
-                            {signInButton}
+                            <ProcessButton onClick={even => this.signIn()} isProcessing={this.state.isSignInProcessing}> Sign In </ProcessButton>
                         </Form>
                     </Col>
                 </Row>
@@ -78,7 +72,7 @@ class SignIn extends React.Component {
                 window.location.href = "/";
             })
             .catch(error => {
-                console.log("SingIn component: validation error: ", error);
+                if (error === null) return;
 
                 this.setState({
                     userName: {

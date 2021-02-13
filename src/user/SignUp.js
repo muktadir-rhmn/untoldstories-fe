@@ -1,8 +1,9 @@
 import React from 'react';
-import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
+import {Col, Container, Form, Row} from "react-bootstrap";
 import userManager from "./UserManager";
 import {userEndpoints} from "./UserEndpoints";
 import notificationTypes from "../notifier/notificationTypes";
+import ProcessButton from "../controls/ProcessButton";
 
 class SignUp extends React.Component{
     constructor(props)  {
@@ -25,13 +26,6 @@ class SignUp extends React.Component{
         if (userManager.isSignedIn()) {
             window.location.href = "/";
             return "";
-        }
-
-        let signUpButton;
-        if (this.state.isSignUpProcessing) {
-            signUpButton = <Button variant="info" disabled><Spinner animation="border" size="sm"/> Sign Up</Button>;
-        } else {
-            signUpButton = <Button variant="info" onClick={event => this.signup()}>Sign Up</Button>;
         }
 
         return (
@@ -68,7 +62,7 @@ class SignUp extends React.Component{
                                     {this.state.password.error}
                                 </Form.Text>
                             </Form.Group>
-                            {signUpButton}
+                            <ProcessButton onClick={even => this.signUp()} isProcessing={this.state.isSignUpProcessing}> Sign Up </ProcessButton>
                         </Form>
                     </Col>
                 </Row>
@@ -76,7 +70,7 @@ class SignUp extends React.Component{
         );
     }
 
-    signup() {
+    signUp() {
         this.setState({isSignUpProcessing: true});
 
         userEndpoints.signUp(this.state.userName.value, this.state.password.value)
@@ -84,7 +78,7 @@ class SignUp extends React.Component{
                 this.props.showNotification(notificationTypes.INFO, "SignUp Successful. You may sign in");
             })
             .catch(error => {
-                console.log("SingUp component: validation error: ", error);
+                if (error === null) return;
 
                 this.setState({
                     userName: {

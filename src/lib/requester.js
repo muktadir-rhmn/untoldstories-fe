@@ -47,9 +47,13 @@ class Requester {
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    const responseObject = JSON.parse(xhr.responseText);
-
                     const responseStatusCode =  xhr.status;
+                    if (responseStatusCode === 0) {
+                        this.showErrorMessage("Failed to connect to the server");
+                        reject(null);
+                    }
+
+                    const responseObject = JSON.parse(xhr.responseText);
                     if (responseStatusCode === RESPONSE_STATUS_CODE.OK) {
                         console.log("Success response:", responseObject);
                         resolve(responseObject);
@@ -58,15 +62,18 @@ class Requester {
 
                         if (responseObject.id === errorResponseID.SINGLE_ERROR_MESSAGE){
                             this.showErrorMessage(responseObject.msg);
+                            reject(null);
                         } else if (responseObject.id === errorResponseID.ERROR_MESSAGE_PER_FIELD) {
                             reject(responseObject); //let the UI show errors by field
                         } else {
                             this.showErrorMessage("Unknown error occurred");
                             console.error("Bug found. Unknown Response Error ID. \nRequest: ", methodName, url, requestBody, "\nResponse:", responseObject);
+                            reject(null);
                         }
                     } else if (responseStatusCode === RESPONSE_STATUS_CODE.INTERNAL_SERVER_ERROR) {
                         this.showErrorMessage("An error occurred in the server");
                         console.error("Internal Server Error. \nRequest: ", methodName, url, requestBody, "\nResponse:", responseObject);
+                        reject(null);
                     }
                 }
             }
@@ -75,7 +82,14 @@ class Requester {
             if (methodName !== "GET") xhr.setRequestHeader("Content-Type", "application/json");
             if (userManager.isSignedIn()) xhr.setRequestHeader("token", userManager.getToken());
 
-            xhr.send(JSON.stringify(requestBody));
+            try {
+                xhr.send(JSON.stringify(requestBody));
+            } catch (ex) {
+                this.showErrorMessage("Could not connect to the server");
+                console.error("Failed to connect tot eh server");
+                reject(null);
+            }
+
         });
     }
 
