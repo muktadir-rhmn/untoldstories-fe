@@ -4,7 +4,7 @@ class UserManager {
     }
 
     getToken() {
-        localStorage.getItem(this._getTokenKey());
+        return localStorage.getItem(this._getTokenKey());
     }
 
     addSignInInfo(userID, token) {

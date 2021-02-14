@@ -75,7 +75,7 @@ class SignUp extends React.Component{
 
         userAPI.signUp(this.state.userName.value, this.state.password.value)
             .then(res => {
-                this.props.showNotification(notificationTypes.INFO, "SignUp Successful. You may sign in");
+                this.props.globalContext.showNotification(notificationTypes.INFO, "SignUp Successful. You may sign in");
             })
             .catch(error => {
                 if (error === null) return;

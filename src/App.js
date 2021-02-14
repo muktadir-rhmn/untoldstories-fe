@@ -7,6 +7,7 @@ import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
 import Notifier from "./notifier/Notifier";
 import requester from "./lib/requester";
+import NewsFeed from "./newsfeed/NewsFeed";
 
 class App extends React.Component {
     constructor(props) {
@@ -18,6 +19,11 @@ class App extends React.Component {
                 notifications: [],
             },
         }
+
+        this.globalContext = {
+            showNotification: (type, message) => this.showNotification(type, message),
+        }
+        Object.freeze(this.globalContext);
 
         requester.setPushNotify((type, message) => this.showNotification(type, message));
     }
@@ -57,7 +63,8 @@ class App extends React.Component {
                 <Notifier notifications={this.state.notifier.notifications} removeNotification={id => this.removeNotification(id)}/>
                 <Router>
                     <SignIn path="/signin"/>
-                    <SignUp path="/signup" showNotification={(type, message) => this.showNotification(type, message)}/>
+                    <SignUp path="/signup" globalContext={this.globalContext}/>
+                    <NewsFeed path="/"/>
                 </Router>
             </div>
         );
