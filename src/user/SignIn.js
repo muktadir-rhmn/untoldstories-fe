@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Col, Container, Form, Row, Spinner} from "react-bootstrap";
-import {userEndpoints} from "./UserEndpoints";
+import {Col, Container, Form, Row} from "react-bootstrap";
+import userAPI from "../apis/UserAPI";
 import userManager from "./UserManager";
 import ProcessButton from "../controls/ProcessButton";
 
@@ -66,7 +66,7 @@ class SignIn extends React.Component {
 
     signIn() {
         this.setState({isSignInProcessing: true});
-        userEndpoints.signIn(this.state.userName.value, this.state.password.value)
+        userAPI.signIn(this.state.userName.value, this.state.password.value)
             .then(res => {
                 userManager.addSignInInfo(res.userID, res.token);
                 window.location.href = "/";

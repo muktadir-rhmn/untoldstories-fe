@@ -7,7 +7,7 @@ class ProcessButton extends React.Component{
         if (this.props.isProcessing) {
             return <Button variant="info" disabled><Spinner animation="border" size="sm"/>{this.props.children}</Button>;
         } else {
-            return <Button variant="info" onClick={event => this.props.onClick(event)}>{this.props.children}</Button>;
+            return <Button variant="info" onClick={event => this.props.onClick(event)} disabled={this.props.disabled}>{this.props.children}</Button>;
         }
     }
 }

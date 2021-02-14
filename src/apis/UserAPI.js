@@ -1,6 +1,6 @@
 import requester from "../lib/requester";
 
-export const userEndpoints = {
+const userAPI = {
     signIn: function (userName, password) {
         const path = "/users/signin";
         const data = {
@@ -21,3 +21,5 @@ export const userEndpoints = {
         return requester.post(path, data);
     }
 }
+
+export default userAPI;

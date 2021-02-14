@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
 import userManager from "./UserManager";
-import {userEndpoints} from "./UserEndpoints";
+import userAPI from "../apis/UserAPI";
 import notificationTypes from "../notifier/notificationTypes";
 import ProcessButton from "../controls/ProcessButton";
 
@@ -73,7 +73,7 @@ class SignUp extends React.Component{
     signUp() {
         this.setState({isSignUpProcessing: true});
 
-        userEndpoints.signUp(this.state.userName.value, this.state.password.value)
+        userAPI.signUp(this.state.userName.value, this.state.password.value)
             .then(res => {
                 this.props.showNotification(notificationTypes.INFO, "SignUp Successful. You may sign in");
             })
