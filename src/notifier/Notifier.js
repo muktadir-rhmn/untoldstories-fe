@@ -22,10 +22,12 @@ class Notifier extends React.Component {
 
     buildNotificationToast(notification) {
         let variant = "";
-        if (notification.type === notificationTypes.ERROR) {
-            variant = "danger";
-        } else if (notification.type === notificationTypes.INFO) {
+        if (notification.type === notificationTypes.INFO) {
+            variant = "info";
+        } else if (notification.type === notificationTypes.SUCCESS) {
             variant = "success";
+        } else if (notification.type === notificationTypes.ERROR) {
+            variant = "danger";
         } else {
             console.error("Unknown notification type", notification)
         }

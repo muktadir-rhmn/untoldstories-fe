@@ -1,6 +1,7 @@
 const notificationTypes = {
     INFO: 0,
-    ERROR: 1,
+    SUCCESS: 1,
+    ERROR: 2,
 }
 
 export default notificationTypes;
