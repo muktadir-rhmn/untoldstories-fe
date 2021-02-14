@@ -64,7 +64,7 @@ class App extends React.Component {
                 <Router>
                     <SignIn path="/signin"/>
                     <SignUp path="/signup" globalContext={this.globalContext}/>
-                    <NewsFeed path="/"/>
+                    <NewsFeed path="/" globalContext={this.globalContext}/>
                 </Router>
             </div>
         );
