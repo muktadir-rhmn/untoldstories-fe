@@ -1,5 +1,5 @@
 import userManager from "../user/UserManager";
-import errorResponseID from "../backendConstants";
+import {errorResponseID} from "../backendConstants";
 import notificationTypes from "../notifier/notificationTypes";
 
 const RESPONSE_STATUS_CODE = {

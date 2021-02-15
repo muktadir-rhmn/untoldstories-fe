@@ -11,7 +11,7 @@ const storyAPI = {
         return requester.get(path, query);
     },
 
-    getStoriesOfAUser: function (userID, pageNo, pageSize) {
+    fetchStoriesOfAUser: function (userID, pageNo, pageSize) {
         const path = "/stories";
         const query = {
             userID: userID,
@@ -46,6 +46,18 @@ const storyAPI = {
 
         return requester.delete(path);
     },
+
+    like: function (storyID) {
+        const path = `/stories/${storyID}/like`;
+
+        return requester.post(path);
+    },
+
+    unlike: function (storyID) {
+        const path = `/stories/${storyID}/reactions`;
+
+        return requester.delete(path);
+    }
 }
 
 export default storyAPI;

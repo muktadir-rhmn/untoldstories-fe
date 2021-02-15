@@ -28,6 +28,10 @@ class UserManager {
         return this._isSignedIn;
     }
 
+    getUserID() {
+        return localStorage.getItem(this._getUserIDKey());
+    }
+
     _getUserIDKey() {
         return "userID";
     }

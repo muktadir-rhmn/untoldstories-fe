@@ -3,6 +3,7 @@ import {Button, Nav, Navbar} from "react-bootstrap";
 import {Link} from "@reach/router";
 import userManager from "../user/UserManager";
 import userPaths from "../user/UserPaths";
+import profilePaths from "../profile/ProfilePaths";
 
 class HeaderMain extends React.Component {
     constructor(props)  {
@@ -18,7 +19,8 @@ class HeaderMain extends React.Component {
         if (isSignedIn)  {
             rightPortion = (
                 <Nav className="mr-4">
-                    <Button variant={"danger"} onClick={event => this.signOut()}>Sign Out</Button>
+                    <Link className="m-2 text-muted" to={profilePaths.timeline(userManager.getUserID())}>My Profile</Link>
+                    <Button variant={"danger"} onClick={() => this.signOut()}>Sign Out</Button>
                 </Nav>
             )
         } else {

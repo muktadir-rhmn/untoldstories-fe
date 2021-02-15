@@ -15,16 +15,14 @@ class NewsFeed extends React.Component {
             <Container className="p-0">
                 <Row>
                     <Col md="3">
-                        Left Side bar
+
                     </Col>
                     <Col md="6">
                         <NewStory globalContext={this.props.globalContext}/>
-                        <Story/>
-
 
                     </Col>
                     <Col md="3">
-                        Right Sidebar
+
                     </Col>
                 </Row>
             </Container>
