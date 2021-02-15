@@ -1,5 +1,5 @@
 import userManager from "../user/UserManager";
-import {errorResponseID} from "../backendConstants";
+import {ErrorResponseID} from "../backendConstants";
 import notificationTypes from "../notifier/notificationTypes";
 
 const RESPONSE_STATUS_CODE = {
@@ -60,10 +60,10 @@ class Requester {
                     } else if (responseStatusCode === RESPONSE_STATUS_CODE.VALIDATION_ERROR) {
                         console.log("Failed response:", responseObject);
 
-                        if (responseObject.id === errorResponseID.SINGLE_ERROR_MESSAGE){
+                        if (responseObject.id === ErrorResponseID.SINGLE_ERROR_MESSAGE){
                             this.showErrorMessage(responseObject.msg);
                             reject(null);
-                        } else if (responseObject.id === errorResponseID.ERROR_MESSAGE_PER_FIELD) {
+                        } else if (responseObject.id === ErrorResponseID.ERROR_MESSAGE_PER_FIELD) {
                             reject(responseObject); //let the UI show errors by field
                         } else {
                             this.showErrorMessage("Unknown error occurred");
