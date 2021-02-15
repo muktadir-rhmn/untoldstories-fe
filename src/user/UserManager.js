@@ -29,7 +29,7 @@ class UserManager {
     }
 
     getUserID() {
-        return localStorage.getItem(this._getUserIDKey());
+        return parseInt(localStorage.getItem(this._getUserIDKey()));
     }
 
     _getUserIDKey() {
