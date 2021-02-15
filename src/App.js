@@ -68,7 +68,7 @@ class App extends React.Component {
                     <SignUp path="/signup" globalContext={this.globalContext}/>
                     <NewsFeed path="/" globalContext={this.globalContext}/>
                     <Profile path="/profile/:userID"/>
-                    <FullStory path="/story/:storyID"/>
+                    <FullStory path="/story/:storyID" globalContext={this.globalContext}/>
                 </Router>
             </div>
         );

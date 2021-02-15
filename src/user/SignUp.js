@@ -2,7 +2,7 @@ import React from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
 import userManager from "./UserManager";
 import userAPI from "../apis/UserAPI";
-import notificationTypes from "../notifier/notificationTypes";
+import NotificationTypes from "../notifier/notificationTypes";
 import ProcessButton from "../controls/ProcessButton";
 
 class SignUp extends React.Component{
@@ -75,7 +75,7 @@ class SignUp extends React.Component{
 
         userAPI.signUp(this.state.userName.value, this.state.password.value)
             .then(res => {
-                this.props.globalContext.showNotification(notificationTypes.INFO, "SignUp Successful. You may sign in");
+                this.props.globalContext.showNotification(NotificationTypes.INFO, "SignUp Successful. You may sign in");
             })
             .catch(error => {
                 if (error === null) return;

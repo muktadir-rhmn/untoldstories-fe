@@ -22,6 +22,12 @@ const storyAPI = {
         return requester.get(path, query);
     },
 
+    fetchStory: function (storyID) {
+        const path = `/stories/${storyID}`;
+
+        return requester.get(path);
+    },
+
     addNew: function (story, privacy) {
         const path = "/stories";
         const data = {

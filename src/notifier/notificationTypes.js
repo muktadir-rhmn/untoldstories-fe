@@ -1,7 +1,7 @@
-const notificationTypes = {
+const NotificationTypes = {
     INFO: 0,
     SUCCESS: 1,
     ERROR: 2,
 }
 
-export default notificationTypes;
+export default NotificationTypes;

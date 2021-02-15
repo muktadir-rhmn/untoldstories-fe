@@ -68,7 +68,7 @@ class SignIn extends React.Component {
         this.setState({isSignInProcessing: true});
         userAPI.signIn(this.state.userName.value, this.state.password.value)
             .then(res => {
-                userManager.addSignInInfo(res.userID, res.token);
+                userManager.addSignInInfo(res.userID, res.userName, res.token);
                 window.location.href = "/";
             })
             .catch(error => {

@@ -7,8 +7,9 @@ class UserManager {
         return localStorage.getItem(this._getTokenKey());
     }
 
-    addSignInInfo(userID, token) {
+    addSignInInfo(userID, token, userName) {
         localStorage.setItem(this._getUserIDKey(), userID);
+        localStorage.setItem(this._getUserNameKey(), userName);
         localStorage.setItem(this._getTokenKey(), token);
 
         this._isSignedIn = userID != null;
@@ -18,6 +19,7 @@ class UserManager {
         this._isSignedIn = false;
 
         localStorage.removeItem(this._getUserIDKey());
+        localStorage.removeItem(this._getUserNameKey());
         localStorage.removeItem(this._getTokenKey());
     }
 
@@ -32,8 +34,16 @@ class UserManager {
         return parseInt(localStorage.getItem(this._getUserIDKey()));
     }
 
+    getUserName() {
+        return localStorage.getItem(this._getUserNameKey());
+    }
+
     _getUserIDKey() {
         return "userID";
+    }
+
+    _getUserNameKey() {
+        return "userName";
     }
 
     _getTokenKey() {

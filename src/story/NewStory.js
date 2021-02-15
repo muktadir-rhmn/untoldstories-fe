@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Col, Form} from "react-bootstrap";
 import ProcessButton from "../controls/ProcessButton";
 import storyAPI from "../apis/StoryAPI";
-import notificationTypes from "../notifier/notificationTypes";
+import NotificationTypes from "../notifier/notificationTypes";
 
 class NewStory extends React.Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class NewStory extends React.Component {
                             </Col>
                             <Col xs="auto" className="my-1">
                                 <ProcessButton
-                                    onClick={event => this.postStory()}
+                                    onClick={event => this.postComment()}
                                     isProcessing={this.state.isProcessingPost}
                                     disabled={this.state.disablePostButton}>Post</ProcessButton>
                             </Col>
@@ -54,7 +54,7 @@ class NewStory extends React.Component {
         );
     }
 
-    postStory() {
+    postComment() {
         this.setState({isProcessingPost: true});
 
         storyAPI.addNew(this.state.body, this.state.privacy)
@@ -64,7 +64,7 @@ class NewStory extends React.Component {
                     body: "",
                 });
 
-                this.props.globalContext.showNotification(notificationTypes.SUCCESS, "Successfully posted...")
+                this.props.globalContext.showNotification(NotificationTypes.SUCCESS, "Successfully posted...")
             }).catch((err) => this.setState({isProcessingPost: false}));
     }
 

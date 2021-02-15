@@ -11,7 +11,7 @@ class Time {
         return `${month} ${day}, ${year}`;
     }
 }
-
+//todo: handle timezone
 const time = new Time();
 
 export default time;

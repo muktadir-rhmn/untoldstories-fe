@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Template extends React.Component {
+class CommentWithReplies extends React.Component{
     constructor(props)  {
         super(props);
 
@@ -16,4 +16,4 @@ class Template extends React.Component {
     }
 }
 
-export default Template;
+export default CommentWithReplies;
