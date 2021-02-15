@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from "react-bootstrap";
+import {Alert, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faComment, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
@@ -14,20 +14,14 @@ class Story extends React.Component{
     constructor(props)  {
         super(props);
 
-        this.state = {
-            didILikeIt: false,
-            nLikes: 0,
-        };
+        this.state = {};
     }
 
     componentDidMount() {
         const story = this.props.story;
         if (story === null) return "";
 
-        this.setState({
-            didILikeIt: story.myReaction > reaction.NO_REACTION,
-            nLikes: story.nLikes,
-        });
+        this.initState(story);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -35,22 +29,39 @@ class Story extends React.Component{
         if (story === null) return "";
 
         if (prevProps.story.id !== story.id) {
-            this.setState({
-                didILikeIt: story.myReaction > reaction.NO_REACTION,
-                nLikes: story.nLikes,
-            })
+            this.initState(story);
         }
+    }
+
+    initState(story) {
+        this.setState({
+            didILikeIt: story.myReaction > reaction.NO_REACTION,
+            nLikes: story.nLikes,
+            isDeleted: false,
+        })
     }
 
     render() {
         const story = this.props.story;
         if (story === null) return "";
+        if (this.state.isDeleted) return <Alert variant="danger">Deleted</Alert>;
 
         return (
             <Card className="mt-4">
                 <Card.Body>
                     <Card.Title>
-                        <Link to={profilePaths.timeline(story.author.id)}>{story.author.userName}</Link>
+                        <div className="d-flex justify-content-between">
+                            <Link to={profilePaths.timeline(story.author.id)}>{story.author.userName}</Link>
+                            <DropdownButton
+                                variant="outline"
+                                menuAlign="right"
+                                title=""
+                                id={`story-${story.id}`}
+                            >
+                                <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
+                                <Dropdown.Item eventKey="2" onClick={() => this.delete()}>Delete</Dropdown.Item>
+                            </DropdownButton>
+                        </div>
                     </Card.Title>
                     <Card.Subtitle className="mb-2">
                         <Link className="text-muted" to={storyPaths.fullStory(story.id)}>{time.epochToReadable(story.cTime)}</Link>
@@ -97,6 +108,14 @@ class Story extends React.Component{
                 });
             }
         );
+    }
+
+    delete() {
+        storyAPI.delete(this.props.story.id).then(
+            () => this.setState({
+                isDeleted: true,
+            })
+        )
     }
 }
 
