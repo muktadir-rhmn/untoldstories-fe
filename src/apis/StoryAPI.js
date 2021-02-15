@@ -32,10 +32,11 @@ const storyAPI = {
         return requester.post(path, data);
     },
 
-    update: function (storyID, newStory) {
+    update: function (storyID, newBody, newPrivacy) {
         const path = `/stories/${storyID}`;
         const data = {
-            story: newStory,
+            body: newBody,
+            privacy: newPrivacy,
         }
 
         return requester.put(path, data);

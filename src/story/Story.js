@@ -1,14 +1,16 @@
 import React from 'react';
 import {Alert, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faComment, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faComment, faThumbsUp, faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import {Link} from "@reach/router";
 import profilePaths from "../profile/ProfilePaths";
 import time from "../lib/time";
-import {reaction} from "../backendConstants";
+import {Reaction, StoryPrivacy} from "../backendConstants";
 import storyPaths from "./StoryPaths";
 import storyAPI from "../apis/StoryAPI";
+import UpdateStory from "./UpdateStory";
+import userManager from "../user/UserManager";
 
 class Story extends React.Component{
     constructor(props)  {
@@ -35,9 +37,12 @@ class Story extends React.Component{
 
     initState(story) {
         this.setState({
-            didILikeIt: story.myReaction > reaction.NO_REACTION,
+            didILikeIt: story.myReaction > Reaction.NO_REACTION,
+            body: story.body,
+            privacy: story.privacy,
             nLikes: story.nLikes,
             isDeleted: false,
+            isUpdate: false,
         })
     }
 
@@ -45,6 +50,29 @@ class Story extends React.Component{
         const story = this.props.story;
         if (story === null) return "";
         if (this.state.isDeleted) return <Alert variant="danger">Deleted</Alert>;
+        if (this.state.isUpdate) return (<UpdateStory key={story.id}
+                                                      id={story.id}
+                                                      body={this.state.body}
+                                                      privacy={this.state.privacy}
+                                                      onFinish={(hasUpdated, body=null, privacy=null) => this.onUpdateFinish(hasUpdated, body, privacy)}
+                                        />);
+
+        let options;
+        if (userManager.getUserID() === story.author.id) {
+            options = (<DropdownButton
+                variant="outline"
+                menuAlign="right"
+                title=""
+                id={`story-${story.id}`}
+            >
+                <Dropdown.Item eventKey="1" onClick={() => this.switchToEdit()}>Edit</Dropdown.Item>
+                <Dropdown.Item eventKey="2" onClick={() => this.delete()}>Delete</Dropdown.Item>
+            </DropdownButton>);
+        }
+
+        let privacy;
+        if (this.state.privacy === StoryPrivacy.PUBLIC) privacy = "Public";
+        else if (this.state.privacy === StoryPrivacy.PRIVATE) privacy = "Private";
 
         return (
             <Card className="mt-4">
@@ -52,22 +80,16 @@ class Story extends React.Component{
                     <Card.Title>
                         <div className="d-flex justify-content-between">
                             <Link to={profilePaths.timeline(story.author.id)}>{story.author.userName}</Link>
-                            <DropdownButton
-                                variant="outline"
-                                menuAlign="right"
-                                title=""
-                                id={`story-${story.id}`}
-                            >
-                                <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
-                                <Dropdown.Item eventKey="2" onClick={() => this.delete()}>Delete</Dropdown.Item>
-                            </DropdownButton>
+                            {options}
                         </div>
                     </Card.Title>
                     <Card.Subtitle className="mb-2">
-                        <Link className="text-muted" to={storyPaths.fullStory(story.id)}>{time.epochToReadable(story.cTime)}</Link>
+                        <Link className="text-muted" to={storyPaths.fullStory(story.id)}>
+                            {privacy} <FontAwesomeIcon icon={faCircleNotch} size="xs"/> {time.epochToReadable(story.cTime)}
+                        </Link>
                     </Card.Subtitle>
                     <Card.Text>
-                        {story.body}
+                        {this.state.body}
                     </Card.Text>
                     {/*<Card.Text className="text-muted">{story.nViews} views</Card.Text>*/}
                 </Card.Body>
@@ -101,9 +123,9 @@ class Story extends React.Component{
         }
 
         promise.then(
-            res => {
+            () => {
                 this.setState({
-                    didILikeIt: ~this.state.didILikeIt,
+                    didILikeIt: dNLikes === 1,
                     nLikes: this.state.nLikes + dNLikes,
                 });
             }
@@ -111,11 +133,35 @@ class Story extends React.Component{
     }
 
     delete() {
+        if(!window.confirm("Do you want to delete it?")) return;
+
         storyAPI.delete(this.props.story.id).then(
             () => this.setState({
                 isDeleted: true,
             })
         )
+    }
+
+    onUpdateFinish(hasUpdated, body, privacy) {
+        if (!hasUpdated) {
+            this.setState({
+                isUpdate: false,
+            })
+            return;
+        }
+
+        this.setState({
+            isUpdate: false,
+            body: body,
+            privacy: privacy,
+        });
+
+    }
+
+    switchToEdit() {
+        this.setState({
+            isUpdate: true,
+        });
     }
 }
 
