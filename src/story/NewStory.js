@@ -9,7 +9,7 @@ class NewStory extends React.Component {
         super(props);
 
         this.state = {
-            story: "",
+            body: "",
             privacy: 1,
             disablePostButton: true,
             isProcessingPost: false,
@@ -24,7 +24,7 @@ class NewStory extends React.Component {
                         <Form.Group>
                             <Form.Control as="textarea"
                                           placeholder="Express your mental burdens..."
-                                          value={this.state.story}
+                                          value={this.state.body}
                                           onChange={event => this.handleStoryBoxChange(event.target.value)}
                             />
                         </Form.Group>
@@ -57,11 +57,11 @@ class NewStory extends React.Component {
     postStory() {
         this.setState({isProcessingPost: true});
 
-        storyAPI.addNew(this.state.story, this.state.privacy)
+        storyAPI.addNew(this.state.body, this.state.privacy)
             .then((res)=>{
                 this.setState({
                     isProcessingPost: false,
-                    story: "",
+                    body: "",
                 });
 
                 this.props.globalContext.showNotification(notificationTypes.SUCCESS, "Successfully posted...")
@@ -70,7 +70,7 @@ class NewStory extends React.Component {
 
     handleStoryBoxChange(newValue) {
         this.setState({
-            story: newValue,
+            body: newValue,
             disablePostButton: newValue.length === 0,
         })
     }
