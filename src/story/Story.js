@@ -98,11 +98,18 @@ class Story extends React.Component{
                     <div className="d-flex justify-content-between">
                         <div className="action-button p-2 text-center" style={{width: '50%', color: 'gray'}}>
                             <a href="#" className="d-block" onClick={() => this.likeUnlike()}>
-                                <FontAwesomeIcon icon={faThumbsUp} size="2x" color={this.state.didILikeIt ? "green" : "gray"}/> {this.state.nLikes}
+                                <FontAwesomeIcon icon={faThumbsUp}
+                                                 size="2x"
+                                                 color={this.state.didILikeIt ? "green" : "gray"}/> {this.state.nLikes === 0 ? "": this.state.nLikes}
                             </a>
                         </div>
                         <div className="action-button p-2 text-center" style={{width: '50%'}}>
-                            <Link to={storyPaths.fullStory(story.id)} className="d-block"><FontAwesomeIcon icon={faComment} size="2x" color="gray"/> {story.nComments}</Link>
+                            <Link to={storyPaths.fullStory(story.id)}
+                                  className="d-block">
+                                <FontAwesomeIcon icon={faComment}
+                                                 size="2x"
+                                                 color="gray"/> {story.nComments === 0 ? "" : story.nComments}
+                            </Link>
                         </div>
                     </div>
                 </Card.Footer>

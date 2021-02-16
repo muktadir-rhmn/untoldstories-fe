@@ -59,11 +59,11 @@ class ReactionControl extends React.Component {
             <div>
                 <Button variant="light" size="sm" onClick={() => this.props.onReact(Reaction.LIKE)}>
                     <FontAwesomeIcon icon={faThumbsUp} color={myReaction === Reaction.LIKE ? "green" : "gray"}/>
-                    <span>{nLikes}  </span>
+                    <span>{nLikes === 0 ? "" : nLikes}  </span>
                 </Button>
                 <Button variant="light" size="sm" onClick={() => this.props.onReact(Reaction.DISLIKE)}>
                     <FontAwesomeIcon icon={faThumbsDown} color={myReaction === Reaction.DISLIKE ? "green" : "gray"}/>
-                    <span>{nDislikes}  </span>
+                    <span>{nDislikes === 0 ? "" : nDislikes}  </span>
                 </Button>
             </div>
         );
