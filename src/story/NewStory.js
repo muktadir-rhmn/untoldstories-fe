@@ -1,8 +1,7 @@
 import React from 'react';
 import {Card, Col, Form} from "react-bootstrap";
-import ProcessButton from "../controls/ProcessButton";
+import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
 import storyAPI from "../apis/StoryAPI";
-import NotificationTypes from "../notifier/notificationTypes";
 
 class NewStory extends React.Component {
     constructor(props) {
@@ -12,7 +11,7 @@ class NewStory extends React.Component {
             body: "",
             privacy: 1,
             disablePostButton: true,
-            isProcessingPost: false,
+            processingStatus: ProcessingButtonStatus.IDLE,
         };
     }
 
@@ -43,8 +42,8 @@ class NewStory extends React.Component {
                             </Col>
                             <Col xs="auto" className="my-1">
                                 <ProcessButton
-                                    onClick={event => this.postComment()}
-                                    isProcessing={this.state.isProcessingPost}
+                                    onClick={() => this.postComment()}
+                                    status={this.state.processingStatus}
                                     disabled={this.state.disablePostButton}>Post</ProcessButton>
                             </Col>
                         </Form.Row>
@@ -55,23 +54,24 @@ class NewStory extends React.Component {
     }
 
     postComment() {
-        this.setState({isProcessingPost: true});
+        this.setState({processingStatus: ProcessingButtonStatus.PROCESSING});
 
-        storyAPI.addNew(this.state.body, this.state.privacy)
-            .then((res)=>{
+        storyAPI.addNew(this.state.body, this.state.privacy).then(
+                () => {
                 this.setState({
-                    isProcessingPost: false,
+                    processingStatus: ProcessingButtonStatus.DONE,
                     body: "",
                 });
-
-                this.props.globalContext.showNotification(NotificationTypes.SUCCESS, "Successfully posted...")
-            }).catch((err) => this.setState({isProcessingPost: false}));
+            }).catch(
+                () => this.setState({processingStatus: ProcessingButtonStatus.FAILED})
+        );
     }
 
     handleStoryBoxChange(newValue) {
         this.setState({
             body: newValue,
             disablePostButton: newValue.length === 0,
+            processingStatus: ProcessingButtonStatus.IDLE,
         })
     }
 }

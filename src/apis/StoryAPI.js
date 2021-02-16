@@ -28,10 +28,10 @@ const storyAPI = {
         return requester.get(path);
     },
 
-    addNew: function (story, privacy) {
+    addNew: function (body, privacy) {
         const path = "/stories";
         const data = {
-            story: story,
+            body: body,
             privacy: privacy,
         }
 
