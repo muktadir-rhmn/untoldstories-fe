@@ -7,9 +7,9 @@ import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
 import Notifier from "./notifier/Notifier";
 import requester from "./lib/requester";
-import NewsFeed from "./newsfeed/NewsFeed";
 import Profile from "./profile/Profile";
 import FullStory from "./story/FullStory";
+import Home from "./Home";
 
 class App extends React.Component {
     constructor(props) {
@@ -66,7 +66,7 @@ class App extends React.Component {
                 <Router>
                     <SignIn path="/signin"/>
                     <SignUp path="/signup" globalContext={this.globalContext}/>
-                    <NewsFeed path="/" globalContext={this.globalContext}/>
+                    <Home path="/" globalContext={this.globalContext}/>
                     <Profile path="/profile/:userID"/>
                     <FullStory path="/story/:storyID" globalContext={this.globalContext}/>
                 </Router>
