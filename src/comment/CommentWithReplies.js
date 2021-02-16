@@ -21,7 +21,9 @@ class CommentWithReplies extends React.Component{
 
         return (
             <div>
-                <Comment comment={comment} onShowReplies={() => this.handleShowReplies()}/>
+                <Comment storyID={this.props.storyID}
+                         comment={comment}
+                         onShowReplies={() => this.handleShowReplies()}/>
                 <div className={"ml-5 pl-3 pr-3 pt-1 pb-2 bg-light " + (this.state.showReplySection ? "" : "d-none")}>
                     <ReplyBox commentID={comment.id} storyID={this.props.storyID} />
                     <ProcessingStatus isProcessing={this.state.replies === null}/>
@@ -62,7 +64,7 @@ class CommentWithReplies extends React.Component{
     }
 
     renderReply(reply) {
-        return <Reply key={reply.id} reply={reply}/>;
+        return <Reply key={reply.id} reply={reply} commentID={this.props.comment.id}/>;
     }
 }
 

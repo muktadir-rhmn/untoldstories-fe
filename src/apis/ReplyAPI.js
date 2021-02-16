@@ -27,13 +27,28 @@ const replyAPI = {
         return requester.delete(path);
     },
 
-    fetchRepliesOfStory: (storyID) => {
-        const path = `/replies`;
-        const queryParams = {
-            storyID: storyID
-        };
+    like: (commentID, replyID) => {
+        const path = `/replies/${replyID}/like`;
+        const data = {
+            commentID: commentID,
+        }
 
-        return requester.get(path, queryParams);
+        return requester.post(path, data);
+    },
+
+    dislike: (commentID, replyID) => {
+        const path = `/replies/${replyID}/dislike`;
+        const data = {
+            commentID: commentID,
+        }
+
+        return requester.post(path, data);
+    },
+
+    deleteReaction: (replyID) => {
+        const path = `/replies/${replyID}/reactions`;
+
+        return requester.delete(path);
     },
 
     fetchRepliesOfComment(commentID) {
