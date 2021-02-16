@@ -56,7 +56,7 @@ class NewsFeed extends React.Component {
         const storiesUI = [];
 
         for (let i = 0; i < stories.length; i++) {
-            storiesUI.push(<Story key={stories[i]} story={stories[i]}/>);
+            storiesUI.push(<Story key={stories[i].id} story={stories[i]}/>);
         }
         return storiesUI;
     }

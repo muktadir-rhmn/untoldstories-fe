@@ -22,7 +22,7 @@ class NewStory extends React.Component {
                     <Form>
                         <Form.Group>
                             <Form.Control as="textarea"
-                                          placeholder="Express your mental burdens..."
+                                          placeholder="Get rid of your mental burdens..."
                                           value={this.state.body}
                                           onChange={event => this.handleStoryBoxChange(event.target.value)}
                             />
