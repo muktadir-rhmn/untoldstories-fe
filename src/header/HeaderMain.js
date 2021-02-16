@@ -19,6 +19,7 @@ class HeaderMain extends React.Component {
         if (isSignedIn)  {
             rightPortion = (
                 <Nav className="mr-4">
+                    <a className="m-2 text-muted" href={"https://forms.gle/4oBHnGweW52xetvH9"}>Feedback</a>
                     <Link className="m-2 text-muted" to={profilePaths.timeline(userManager.getUserID())}>My Profile</Link>
                     <Button variant={"danger"} onClick={() => this.signOut()}>Sign Out</Button>
                 </Nav>
