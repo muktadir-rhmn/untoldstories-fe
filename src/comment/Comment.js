@@ -1,11 +1,12 @@
 import React from 'react';
-import {Button, Card} from "react-bootstrap";
+import {Alert, Button, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import profilePaths from "../profile/ProfilePaths";
 import {Link} from "@reach/router";
 import time from "../lib/time";
 import {Reaction} from "../backendConstants";
 import commentAPI from "../apis/CommentAPI";
 import ReactionControl from "./ReactionControl";
+import userManager from "../user/UserManager";
 
 class Comment extends React.Component {
     constructor(props)  {
@@ -13,6 +14,7 @@ class Comment extends React.Component {
 
         this.state = {
             myReaction: props.comment.myReaction,
+            isDeleted: false,
         };
     }
 
@@ -25,14 +27,19 @@ class Comment extends React.Component {
     }
 
     render() {
+        if (this.state.isDeleted) return <Alert variant="danger">Deleted</Alert>;
         const comment = this.props.comment;
 
         return (
             <Card className="mt-3">
                 <Card.Body>
                     <div className="d-flex justify-content-between">
-                        <Link to={profilePaths.timeline(comment.author.id)}>{comment.author.userName}</Link>
-                        <span className="text-muted">{time.epochToReadable(comment.cTime)}</span>
+                        <div>
+                            <Link to={profilePaths.timeline(comment.author.id)}>{comment.author.userName}</Link>
+                            <span className="text-muted small"> {time.epochToReadable(comment.cTime)} </span>
+                        </div>
+
+                        {this.renderOptions(comment)}
                     </div>
 
                     <Card.Text>
@@ -51,6 +58,22 @@ class Comment extends React.Component {
                 </Card.Footer>
             </Card>
         );
+    }
+
+    renderOptions(comment) {
+        let options;
+        if (userManager.getUserID() === comment.author.id) {
+            options = (<DropdownButton
+                variant="outline"
+                menuAlign="right"
+                title=""
+                id={`story-${comment.id}`}
+            >
+                {/*<Dropdown.Item eventKey="1" onClick={() => this.switchToEdit()}>Edit</Dropdown.Item>*/}
+                <Dropdown.Item eventKey="2" onClick={() => this.delete()}>Delete</Dropdown.Item>
+            </DropdownButton>);
+        }
+        return options;
     }
 
     handleOnReaction(reaction) {
@@ -74,6 +97,14 @@ class Comment extends React.Component {
         promise.then(
             () => this.setState({
                 myReaction: newReaction,
+            })
+        )
+    }
+
+    delete() {
+        commentAPI.delete(this.props.comment.id).then(
+            () => this.setState({
+                isDeleted: true,
             })
         )
     }

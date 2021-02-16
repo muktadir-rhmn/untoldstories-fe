@@ -1,11 +1,12 @@
 import React from 'react';
-import {Card} from "react-bootstrap";
+import {Alert, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import {Link} from "@reach/router";
 import profilePaths from "../profile/ProfilePaths";
 import time from "../lib/time";
 import {Reaction} from "../backendConstants";
 import replyAPI from "../apis/ReplyAPI";
 import ReactionControl from "./ReactionControl";
+import userManager from "../user/UserManager";
 
 class Reply extends React.Component {
     constructor(props)  {
@@ -13,6 +14,7 @@ class Reply extends React.Component {
 
         this.state = {
             myReaction: props.reply.myReaction,
+            isDeleted: false,
         };
     }
 
@@ -25,14 +27,18 @@ class Reply extends React.Component {
     }
 
     render() {
+        if (this.state.isDeleted) return <Alert variant="danger">Deleted</Alert>;
         const reply = this.props.reply;
 
         return (
             <Card className="mt-3">
                 <Card.Body>
                     <div className="d-flex justify-content-between">
-                        <Link to={profilePaths.timeline(reply.author.id)}>{reply.author.userName}</Link>
-                        <span className="text-muted">{time.epochToReadable(reply.cTime)}</span>
+                        <div>
+                            <Link to={profilePaths.timeline(reply.author.id)}>{reply.author.userName}</Link>
+                            <span className="text-muted small">  {time.epochToReadable(reply.cTime)}</span>
+                        </div>
+                        {this.renderOptions(reply)}
                     </div>
 
                     <Card.Text>
@@ -46,6 +52,22 @@ class Reply extends React.Component {
                 </Card.Body>
             </Card>
         );
+    }
+
+    renderOptions(reply) {
+        let options;
+        if (userManager.getUserID() === reply.author.id) {
+            options = (<DropdownButton
+                variant="outline"
+                menuAlign="right"
+                title=""
+                id={`story-${reply.id}`}
+            >
+                {/*<Dropdown.Item eventKey="1" onClick={() => this.switchToEdit()}>Edit</Dropdown.Item>*/}
+                <Dropdown.Item eventKey="2" onClick={() => this.delete()}>Delete</Dropdown.Item>
+            </DropdownButton>);
+        }
+        return options;
     }
 
     handleOnReaction(reaction) {
@@ -69,6 +91,14 @@ class Reply extends React.Component {
         promise.then(
             () => this.setState({
                 myReaction: newReaction,
+            })
+        )
+    }
+
+    delete() {
+        replyAPI.delete(this.props.reply.id).then(
+            () => this.setState({
+                isDeleted: true,
             })
         )
     }
