@@ -3,7 +3,7 @@ import {Col, Container, Form, Row} from "react-bootstrap";
 import userManager from "./UserManager";
 import userAPI from "../apis/UserAPI";
 import NotificationTypes from "../notifier/notificationTypes";
-import ProcessButton from "../controls/ProcessButton";
+import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
 
 class SignUp extends React.Component{
     constructor(props)  {
@@ -18,7 +18,7 @@ class SignUp extends React.Component{
                 value: "",
                 error: ""
             },
-            isSignUpProcessing: false,
+            processingStatus: ProcessingButtonStatus.IDLE,
         };
     }
 
@@ -62,7 +62,8 @@ class SignUp extends React.Component{
                                     {this.state.password.error}
                                 </Form.Text>
                             </Form.Group>
-                            <ProcessButton onClick={even => this.signUp()} isProcessing={this.state.isSignUpProcessing}> Sign Up </ProcessButton>
+                            <ProcessButton status={this.state.processingStatus}
+                                           onClick={() => this.signUp()}> Sign Up </ProcessButton>
                         </Form>
                     </Col>
                 </Row>
@@ -71,11 +72,14 @@ class SignUp extends React.Component{
     }
 
     signUp() {
-        this.setState({isSignUpProcessing: true});
+        this.setState({processingStatus: ProcessingButtonStatus.PROCESSING});
 
         userAPI.signUp(this.state.userName.value, this.state.password.value)
             .then(res => {
                 this.props.globalContext.showNotification(NotificationTypes.INFO, "SignUp Successful. You may sign in");
+                this.setState({
+                    processingStatus: ProcessingButtonStatus.DONE,
+                })
             })
             .catch(error => {
                 if (error === null) return;
@@ -91,7 +95,7 @@ class SignUp extends React.Component{
                     }
                 });
 
-            }).finally(() => this.setState({isSignUpProcessing: false}));
+            }).finally(() => this.setState({processingStatus: ProcessingButtonStatus.IDLE}));
     }
 }
 

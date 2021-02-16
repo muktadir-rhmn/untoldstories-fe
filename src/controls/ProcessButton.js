@@ -14,7 +14,7 @@ export const ProcessingButtonStatus = {
  * Props:
  *      - hide boolean: to control visibility
  *      - disabled boolean: to control disability
- *      - isProcessing boolean: to disable and show spinner while processing
+ *      - status: [IDLE, PROCESSING, DONE, FAILED]
  *      - onClick function: click handler
  */
 class ProcessButton extends React.Component {

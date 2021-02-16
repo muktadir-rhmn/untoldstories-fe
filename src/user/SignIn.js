@@ -2,7 +2,7 @@ import React from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
 import userAPI from "../apis/UserAPI";
 import userManager from "./UserManager";
-import ProcessButton from "../controls/ProcessButton";
+import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
 
 class SignIn extends React.Component {
     constructor(props)  {
@@ -17,7 +17,7 @@ class SignIn extends React.Component {
                 value: "",
                 error: ""
             },
-            isSignInProcessing: false,
+            processingStatus: ProcessingButtonStatus.IDLE,
         };
     }
 
@@ -55,7 +55,8 @@ class SignIn extends React.Component {
                                     {this.state.password.error}
                                 </Form.Text>
                             </Form.Group>
-                            <ProcessButton onClick={even => this.signIn()} isProcessing={this.state.isSignInProcessing}> Sign In </ProcessButton>
+                            <ProcessButton status={this.state.processingStatus}
+                                           onClick={() => this.signIn()}> Sign In </ProcessButton>
                         </Form>
                     </Col>
                 </Row>
@@ -65,7 +66,8 @@ class SignIn extends React.Component {
     }
 
     signIn() {
-        this.setState({isSignInProcessing: true});
+        this.setState({processingStatus: ProcessingButtonStatus.PROCESSING});
+
         userAPI.signIn(this.state.userName.value, this.state.password.value)
             .then(res => {
                 userManager.addSignInInfo(res.userID, res.userName, res.token);
@@ -82,10 +84,10 @@ class SignIn extends React.Component {
                     password: {
                         value: this.state.password.value,
                         error: error.password ? error.password : "",
-                    }
+                    },
                 });
 
-            }).finally(() => this.setState({isSignInProcessing: false}));
+            }).finally(() => this.setState({processingStatus: ProcessingButtonStatus.IDLE}));
     }
 
 }

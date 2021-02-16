@@ -75,6 +75,7 @@ class Requester {
                         console.error("Internal Server Error. \nRequest: ", methodName, url, requestBody, "\nResponse:", responseObject);
                         reject(null);
                     }
+                    reject(null);
                 }
             }
             xhr.open(methodName, url, true);
