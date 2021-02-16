@@ -39,7 +39,7 @@ class Comment extends React.Component {
                         {comment.body}
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer className="text-muted d-flex justify-content-between">
+                <Card.Footer className="text-muted d-flex justify-content-between p-1">
                     <ReactionControl key={this.props.comment.id}
                                      myReaction={this.state.myReaction}
                                      nLikes={this.props.comment.nLikes}
