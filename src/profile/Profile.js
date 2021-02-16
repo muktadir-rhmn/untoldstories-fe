@@ -2,43 +2,42 @@ import React from 'react';
 import Story from "../story/Story";
 import {Col, Container, Row} from "react-bootstrap";
 import storyAPI from "../apis/StoryAPI";
-import ProcessingStatus from "../controls/ProcessingStatus";
 import userAPI from "../apis/UserAPI";
 import {Link} from "@reach/router";
 import profilePaths from "./ProfilePaths";
+import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
 
-class Profile extends React.Component{
+class Profile extends React.Component {
     constructor(props)  {
         super(props);
 
         this.DEFAULT_PAGE_SIZE = 5;
+        this.pageSize = this.DEFAULT_PAGE_SIZE;
 
-        this.state = {
-            stories: [],
-            pageNo: -1,
-            pageSize: this.DEFAULT_PAGE_SIZE,
+        this.initialState = () => {
+            return {
+                pageNo: -1,
+                stories: [],
+                user: null,
 
-            user: null,
-
-            isProcessing: false,
+                hasMoreStories: true,
+                processingStatus: ProcessingButtonStatus.PROCESSING,
+            };
         };
+
+        this.state = this.initialState();
     }
 
     componentDidMount() {
-        this.fetchUserStories(this.props.userID, 0, this.DEFAULT_PAGE_SIZE);
         this.fetchUserData(this.props.userID);
+        this.fetchUserStories(this.props.userID, 0);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.userID !== this.props.userID) {
-            this.setState({
-                pageNo: -1,
-                stories: [],
-                user: null,
-            });
-
-            this.fetchUserStories(this.props.userID, 0, this.DEFAULT_PAGE_SIZE);
+            this.setState(this.initialState());
             this.fetchUserData(this.props.userID);
+            this.fetchUserStories(this.props.userID, 0);
         }
     }
 
@@ -55,8 +54,15 @@ class Profile extends React.Component{
                     </Col>
                     <Col md="6">
                         <h3 className="text-muted">Stories</h3>
-                        <ProcessingStatus isProcessing={this.state.isProcessing} />
                         {storiesUI}
+
+                        <div className="card">
+                            <ProcessButton variant="success"
+                                           status={this.state.processingStatus}
+                                           hide={!this.state.hasMoreStories}
+                                           onClick={() => this.fetchUserStories(this.props.userID, this.state.pageNo + 1)}
+                            >Load More</ProcessButton>
+                        </div>
                     </Col>
                     <Col md="3">
 
@@ -68,27 +74,10 @@ class Profile extends React.Component{
 
     renderStories(stories) {
         const storiesUI = [];
-        for (let story of stories){
+        for (let story of stories) {
             storiesUI.push(<Story key={story.id} story={story}/>);
         }
         return storiesUI;
-    }
-
-    fetchUserStories(userID, pageNo, pageSize) {
-        this.setState({
-            isProcessing: true,
-        })
-
-        storyAPI.fetchStoriesOfAUser(userID, pageNo, pageSize).then(
-            res => this.setState({
-                stories: pageNo === 0 ? res.stories : this.state.stories.join(res.stories),
-                pageNo: pageNo,
-            })
-        ).finally(
-            () => this.setState({
-                isProcessing: false,
-            })
-        );
     }
 
     renderHeading() {
@@ -107,19 +96,43 @@ class Profile extends React.Component{
     }
 
     fetchUserData(userID) {
-        this.setState({
-            isProcessing: true,
-        })
+        this.setProcessing();
 
         userAPI.fetchUserData(userID).then(
             res => this.setState({
                 user: res
             })
         ).finally(
-            () => this.setState({
-                isProcessing: false,
-            })
+            () => this.unsetProcessing(),
         )
+    }
+
+    fetchUserStories(userID, pageNo) {
+        this.setProcessing();
+
+        storyAPI.fetchStoriesOfAUser(userID, pageNo, this.pageSize).then(
+            res => {
+                this.setState({
+                    stories: pageNo === 0 ? res.stories : this.state.stories.concat(res.stories),
+                    pageNo: pageNo,
+                    hasMoreStories: res.stories.length === this.pageSize,
+                });
+            }
+        ).finally(
+            () => this.unsetProcessing()
+        );
+    }
+
+    setProcessing() {
+        this.setState({
+            processingStatus: ProcessingButtonStatus.PROCESSING,
+        });
+    }
+
+    unsetProcessing() {
+        this.setState({
+            processingStatus: ProcessingButtonStatus.IDLE,
+        });
     }
 }
 

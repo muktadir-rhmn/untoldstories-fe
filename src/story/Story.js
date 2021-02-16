@@ -49,6 +49,7 @@ class Story extends React.Component{
     render() {
         const story = this.props.story;
         if (story === null) return "";
+
         if (this.state.isDeleted) return <Alert variant="danger">Deleted</Alert>;
         if (this.state.isUpdate) return (<UpdateStory key={story.id}
                                                       id={story.id}

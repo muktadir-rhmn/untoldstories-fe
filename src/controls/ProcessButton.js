@@ -21,19 +21,22 @@ class ProcessButton extends React.Component {
 
     render() {
         if (this.props.hide) return "";
+        const variant = "variant" in this.props ? this.props.variant : "success";
 
         const status = this.props.status;
         if (status === ProcessingButtonStatus.IDLE) {
-            return <Button variant="info"
+            return <Button variant={variant}
                            onClick={event => this.props.onClick(event)}
                            disabled={this.props.disabled}
             >{this.props.children}</Button>;
         } else if (status === ProcessingButtonStatus.PROCESSING) {
-            return <Button variant="info" disabled><Spinner animation="border" size="sm"/>{this.props.children}</Button>;
+            return <Button variant={variant} disabled><Spinner animation="border" size="sm"/>{this.props.children}</Button>;
         } else if (status === ProcessingButtonStatus.DONE) {
             return <span style={{color: "rgb(4, 191, 53)", padding: "8px"}}><FontAwesomeIcon icon={faCheck} size="sm"/> Done</span>;
         } else if (status === ProcessingButtonStatus.FAILED) {
             return <span style={{color: "rgb(245, 71, 69)", padding: "8px"}}><FontAwesomeIcon icon={faTimes} size="sm"/> Failed</span>;
+        } else {
+            console.error("Invalid status");
         }
     }
 }
