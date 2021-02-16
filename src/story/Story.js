@@ -1,7 +1,7 @@
 import React from 'react';
 import {Alert, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faComment, faThumbsUp, faCircleNotch} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faComment, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import {Link} from "@reach/router";
 import profilePaths from "../profile/ProfilePaths";

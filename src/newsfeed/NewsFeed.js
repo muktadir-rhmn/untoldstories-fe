@@ -1,7 +1,6 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import NewStory from "../story/NewStory";
-import Story from "../story/Story";
 
 class NewsFeed extends React.Component {
     constructor(props) {
