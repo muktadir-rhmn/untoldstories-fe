@@ -1,5 +1,5 @@
 import userManager from "../user/UserManager";
-import {ErrorResponseID} from "../backendConstants";
+import {baseURL, ErrorResponseID} from "../backendConstants";
 import NotificationTypes from "../notifier/notificationTypes";
 
 const RESPONSE_STATUS_CODE = {
@@ -100,5 +100,5 @@ class Requester {
     }
 }
 
-const requester = new Requester("http://localhost:8080");
+const requester = new Requester(baseURL);
 export default requester;

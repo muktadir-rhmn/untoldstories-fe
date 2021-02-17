@@ -1,3 +1,5 @@
+export const baseURL = "http://localhost:8080";
+
 export const ErrorResponseID = {
     SINGLE_ERROR_MESSAGE: 1,
     ERROR_MESSAGE_PER_FIELD: 2,

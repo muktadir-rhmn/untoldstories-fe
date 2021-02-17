@@ -11,6 +11,7 @@ import storyPaths from "./StoryPaths";
 import storyAPI from "../apis/StoryAPI";
 import UpdateStory from "./UpdateStory";
 import userManager from "../user/UserManager";
+import FacebookSharer from "./FacebookSharer";
 
 class Story extends React.Component{
     constructor(props)  {
@@ -93,6 +94,9 @@ class Story extends React.Component{
                         {this.state.body}
                     </Card.Text>
                     {/*<Card.Text className="text-muted">{story.nViews} views</Card.Text>*/}
+                    <div className="d-flex justify-content-end">
+                        <FacebookSharer path={storyPaths.fullStory(story.id)}/>
+                    </div>
                 </Card.Body>
                 <Card.Footer className="p-0">
                     <div className="d-flex justify-content-between">
