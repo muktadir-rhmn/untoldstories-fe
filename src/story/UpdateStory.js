@@ -1,27 +1,19 @@
 import React from 'react';
 import {Button, Card, Col, Form} from "react-bootstrap";
-import ProcessButton from "../controls/ProcessButton";
+import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
 import storyAPI from "../apis/StoryAPI";
 
 class UpdateStory extends React.Component{
     constructor(props)  {
         super(props);
 
-        this.state = {};
-    }
-
-    componentDidMount() {
-        this.initState(this.props.id, this.props.body, this.props.privacy);
-    }
-
-    initState(id, body, privacy) {
-        this.setState({
-            id: id,
-            body: body,
-            privacy: privacy,
+        this.state = {
+            id: props.id,
+            body: props.body,
+            privacy: props.privacy,
             disablePostButton: false,
-            isProcessingPost: false,
-        })
+            processingStatus: ProcessingButtonStatus.IDLE,
+        };
     }
 
     render() {
@@ -52,7 +44,7 @@ class UpdateStory extends React.Component{
                             <Col xs="auto" className="my-1">
                                 <ProcessButton
                                     onClick={() => this.updateStory()}
-                                    isProcessing={this.state.isProcessingPost}
+                                    status={this.state.processingStatus}
                                     disabled={this.state.disablePostButton}>
                                     Update
                                 </ProcessButton>
