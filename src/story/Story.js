@@ -1,7 +1,7 @@
 import React from 'react';
 import {Alert, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCircleNotch, faComment, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faCaretRight, faComment, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import {Link} from "@reach/router";
 import profilePaths from "../profile/ProfilePaths";
@@ -87,7 +87,7 @@ class Story extends React.Component{
                     </Card.Title>
                     <Card.Subtitle className="mb-2">
                         <Link className="text-muted" to={storyPaths.fullStory(story.id)}>
-                            {privacy} <FontAwesomeIcon icon={faCircleNotch} size="xs"/> {time.epochToReadable(story.cTime)}
+                            {privacy} <FontAwesomeIcon icon={faCaretRight} size="xs"/> {time.epochToReadable(story.cTime)}
                         </Link>
                     </Card.Subtitle>
                     <Card.Text>
