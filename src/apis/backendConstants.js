@@ -1,4 +1,4 @@
-export const baseURL = "http://localhost:8080";
+export const baseURL = "https://api.untoldstories.me";
 
 export const ErrorResponseID = {
     SINGLE_ERROR_MESSAGE: 1,

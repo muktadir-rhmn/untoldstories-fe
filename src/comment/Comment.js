@@ -3,7 +3,7 @@ import {Alert, Button, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import profilePaths from "../profile/ProfilePaths";
 import {Link} from "@reach/router";
 import time from "../lib/time";
-import {Reaction} from "../backendConstants";
+import {Reaction} from "../apis/backendConstants";
 import commentAPI from "../apis/CommentAPI";
 import ReactionControl from "./ReactionControl";
 import userManager from "../user/UserManager";

@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsDown, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
-import {Reaction} from "../backendConstants";
+import {Reaction} from "../apis/backendConstants";
 
 class ReactionControl extends React.Component {
     constructor(props) {

@@ -6,7 +6,7 @@ import "./style.css";
 import {Link} from "@reach/router";
 import profilePaths from "../profile/ProfilePaths";
 import time from "../lib/time";
-import {Reaction, StoryPrivacy} from "../backendConstants";
+import {Reaction, StoryPrivacy} from "../apis/backendConstants";
 import storyPaths from "./StoryPaths";
 import storyAPI from "../apis/StoryAPI";
 import UpdateStory from "./UpdateStory";
