@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FacebookSharer extends React.Component {
+export class FacebookSharer extends React.Component {
 
     render() {
         const baseURL = "https://untoldstories.me";
@@ -15,5 +15,3 @@ class FacebookSharer extends React.Component {
         );
     }
 }
-
-export default FacebookSharer;

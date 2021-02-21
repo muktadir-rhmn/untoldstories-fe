@@ -1,6 +1,6 @@
-import requester from "../lib/requester";
+import {requester} from "../lib/requester";
 
-const replyAPI = {
+export const replyAPI = {
     add: (storyID, commentID, body) => {
         const path = `/replies`;
         const data = {
@@ -60,5 +60,3 @@ const replyAPI = {
         return requester.get(path, queryParams);
     }
 }
-
-export default replyAPI;

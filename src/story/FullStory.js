@@ -1,11 +1,11 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
-import ProcessingStatus from "../controls/ProcessingStatus";
-import Story from "./Story";
-import CommentSection from "../comment/CommentSection";
-import storyAPI from "../apis/StoryAPI";
+import {ProcessingStatus} from "../controls/ProcessingStatus";
+import {Story} from "./Story";
+import {CommentSection} from "../comment/CommentSection";
+import {storyAPI} from "../apis/StoryAPI";
 
-class FullStory extends React.Component{
+export class FullStory extends React.Component{
     constructor(props) {
         super(props);
 
@@ -60,5 +60,3 @@ class FullStory extends React.Component{
         )
     }
 }
-
-export default FullStory;

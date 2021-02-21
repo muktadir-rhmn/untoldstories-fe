@@ -1,6 +1,6 @@
-import requester from "../lib/requester";
+import {requester} from "../lib/requester";
 
-const userAPI = {
+export const userAPI = {
     signIn: (userName, password) => {
         const path = "/users/signin";
         const data = {
@@ -27,5 +27,3 @@ const userAPI = {
         return requester.get(path);
     }
 }
-
-export default userAPI;

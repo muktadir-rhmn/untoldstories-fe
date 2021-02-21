@@ -38,5 +38,3 @@ export class Message extends React.Component {
         return (<Alert variant={message.variant} onClose={() => this.setState({isClosed: true,})} dismissible>{message.body}</Alert>);
     }
 }
-
-export default Message;

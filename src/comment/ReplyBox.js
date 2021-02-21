@@ -1,9 +1,9 @@
 import React from 'react';
-import InputBox from "./InputBox";
-import replyAPI from "../apis/ReplyAPI";
+import {InputBox} from "./InputBox";
+import {replyAPI} from "../apis/ReplyAPI";
 import {ProcessingButtonStatus} from "../controls/ProcessButton";
 
-class ReplyBox extends React.Component {
+export class ReplyBox extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -48,5 +48,3 @@ class ReplyBox extends React.Component {
         });
     }
 }
-
-export default ReplyBox;

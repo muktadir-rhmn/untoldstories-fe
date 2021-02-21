@@ -12,6 +12,4 @@ class Time {
     }
 }
 //todo: handle timezone
-const time = new Time();
-
-export default time;
+export const time = new Time();

@@ -51,6 +51,4 @@ class UserManager {
     }
 }
 
-const userManager = new UserManager();
-
-export default userManager;
+export const userManager = new UserManager();

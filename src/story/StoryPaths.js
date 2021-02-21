@@ -1,5 +1,3 @@
-const storyPaths = {
+export const storyPaths = {
     fullStory: (storyID) => `/story/${storyID}`
 }
-
-export default storyPaths;

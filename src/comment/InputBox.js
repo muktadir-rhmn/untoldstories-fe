@@ -1,8 +1,8 @@
 import React from 'react';
 import {Form} from "react-bootstrap";
-import ProcessButton from "../controls/ProcessButton";
+import {ProcessButton} from "../controls/ProcessButton";
 
-class InputBox extends React.Component {
+export class InputBox extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -50,5 +50,3 @@ class InputBox extends React.Component {
         }
     }
 }
-
-export default InputBox;

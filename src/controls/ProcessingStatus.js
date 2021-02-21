@@ -1,7 +1,7 @@
 import React from 'react';
 import {Spinner} from "react-bootstrap";
 
-class ProcessingStatus extends React.Component{
+export class ProcessingStatus extends React.Component{
     render() {
         if (!this.props.isProcessing) return "";
 
@@ -12,5 +12,3 @@ class ProcessingStatus extends React.Component{
         )
     }
 }
-
-export default ProcessingStatus;

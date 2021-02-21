@@ -1,7 +1,7 @@
 import React from 'react';
-import commentAPI from "../apis/CommentAPI";
-import userManager from "../user/UserManager";
-import InputBox from "./InputBox";
+import {commentAPI} from "../apis/CommentAPI";
+import {userManager} from "../user/UserManager";
+import {InputBox} from "./InputBox";
 import {ProcessingButtonStatus} from "../controls/ProcessButton";
 
 class CommentBox extends React.Component {

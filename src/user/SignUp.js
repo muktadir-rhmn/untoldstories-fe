@@ -1,11 +1,11 @@
 import React from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
-import userManager from "./UserManager";
-import userAPI from "../apis/UserAPI";
-import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
-import Message, {generateMessage, MessageType} from "../controls/Message";
+import {userManager} from "./UserManager";
+import {userAPI} from "../apis/UserAPI";
+import {ProcessButton, ProcessingButtonStatus} from "../controls/ProcessButton";
+import {Message, generateMessage, MessageType} from "../controls/Message";
 
-class SignUp extends React.Component{
+export class SignUp extends React.Component{
     constructor(props)  {
         super(props);
 
@@ -103,5 +103,3 @@ class SignUp extends React.Component{
             }));
     }
 }
-
-export default SignUp;

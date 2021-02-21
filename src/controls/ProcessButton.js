@@ -17,7 +17,7 @@ export const ProcessingButtonStatus = {
  *      - status: [IDLE, PROCESSING, DONE, FAILED]
  *      - onClick function: click handler
  */
-class ProcessButton extends React.Component {
+export class ProcessButton extends React.Component {
 
     render() {
         if (this.props.hide) return "";
@@ -41,4 +41,3 @@ class ProcessButton extends React.Component {
     }
 }
 
-export default ProcessButton;

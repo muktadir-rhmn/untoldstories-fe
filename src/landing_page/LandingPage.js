@@ -1,9 +1,9 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import {Link} from "@reach/router";
-import userPaths from "../user/UserPaths";
+import {userPaths} from "../user/UserPaths";
 
-class LandingPage extends React.Component {
+export class LandingPage extends React.Component {
 
     render() {
         return (
@@ -45,5 +45,3 @@ class LandingPage extends React.Component {
         );
     }
 }
-
-export default LandingPage;

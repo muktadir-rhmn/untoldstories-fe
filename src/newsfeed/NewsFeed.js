@@ -1,11 +1,11 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
-import NewStory from "../story/NewStory";
-import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
-import Story from "../story/Story";
-import newsfeedAPI from "../apis/NewsFeedAPI";
+import {NewStory} from "../story/NewStory";
+import {ProcessButton, ProcessingButtonStatus} from "../controls/ProcessButton";
+import {Story} from "../story/Story";
+import {newsfeedAPI} from "../apis/NewsFeedAPI";
 
-class NewsFeed extends React.Component {
+export class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
 
@@ -80,5 +80,3 @@ class NewsFeed extends React.Component {
         )
     }
 }
-
-export default NewsFeed;

@@ -1,9 +1,9 @@
 import React from 'react';
 import CommentBox from "./CommentBox";
-import commentAPI from "../apis/CommentAPI";
-import CommentWithReplies from "./CommentWithReplies";
+import {commentAPI} from "../apis/CommentAPI";
+import {CommentWithReplies} from "./CommentWithReplies";
 
-class CommentSection extends React.Component {
+export class CommentSection extends React.Component {
     constructor(props) {
         super(props);
 
@@ -64,5 +64,3 @@ class CommentSection extends React.Component {
         )
     }
 }
-
-export default CommentSection;

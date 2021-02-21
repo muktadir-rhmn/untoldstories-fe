@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Template extends React.Component {
+export class Template extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -15,5 +15,3 @@ class Template extends React.Component {
         );
     }
 }
-
-export default Template;

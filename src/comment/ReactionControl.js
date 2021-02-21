@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsDown, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {Reaction} from "../apis/backendConstants";
 
-class ReactionControl extends React.Component {
+export class ReactionControl extends React.Component {
     constructor(props) {
         super(props);
 
@@ -69,5 +69,3 @@ class ReactionControl extends React.Component {
         );
     }
 }
-
-export default ReactionControl;

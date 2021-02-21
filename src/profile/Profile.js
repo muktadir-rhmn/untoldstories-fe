@@ -1,13 +1,13 @@
 import React from 'react';
-import Story from "../story/Story";
+import {Story} from "../story/Story";
 import {Col, Container, Row} from "react-bootstrap";
-import storyAPI from "../apis/StoryAPI";
-import userAPI from "../apis/UserAPI";
+import {storyAPI} from "../apis/StoryAPI";
+import {userAPI} from "../apis/UserAPI";
 import {Link} from "@reach/router";
-import profilePaths from "./ProfilePaths";
-import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
+import {profilePaths} from "./ProfilePaths";
+import {ProcessButton, ProcessingButtonStatus} from "../controls/ProcessButton";
 
-class Profile extends React.Component {
+export class Profile extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -135,5 +135,3 @@ class Profile extends React.Component {
         });
     }
 }
-
-export default Profile;

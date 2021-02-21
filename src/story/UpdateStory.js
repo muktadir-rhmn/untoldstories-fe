@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, Card, Col, Form} from "react-bootstrap";
-import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
-import storyAPI from "../apis/StoryAPI";
+import {ProcessButton, ProcessingButtonStatus} from "../controls/ProcessButton";
+import {storyAPI} from "../apis/StoryAPI";
 
-class UpdateStory extends React.Component{
+export class UpdateStory extends React.Component{
     constructor(props)  {
         super(props);
 
@@ -77,5 +77,3 @@ class UpdateStory extends React.Component{
         })
     }
 }
-
-export default UpdateStory;

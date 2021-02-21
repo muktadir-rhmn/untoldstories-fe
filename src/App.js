@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Router} from "@reach/router";
-import MainHeader from "./header/HeaderMain";
-import SignIn from "./user/SignIn";
-import SignUp from "./user/SignUp";
-import requester from "./lib/requester";
-import Profile from "./profile/Profile";
-import FullStory from "./story/FullStory";
-import Home from "./Home";
-import Message, {generateMessage} from "./controls/Message";
+import {SignIn} from "./user/SignIn";
+import {SignUp} from "./user/SignUp";
+import {requester} from "./lib/requester";
+import {Profile} from "./profile/Profile";
+import {FullStory} from "./story/FullStory";
+import {Home} from "./Home";
+import {Message, generateMessage} from "./controls/Message";
+import {MainHeader} from "./header/HeaderMain";
 
 class App extends React.Component {
     constructor(props) {

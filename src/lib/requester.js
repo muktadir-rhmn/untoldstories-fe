@@ -1,4 +1,4 @@
-import userManager from "../user/UserManager";
+import {userManager} from "../user/UserManager";
 import {baseURL, ErrorResponseID} from "../apis/backendConstants";
 import {MessageType} from "../controls/Message";
 
@@ -100,5 +100,4 @@ class Requester {
     }
 }
 
-const requester = new Requester(baseURL);
-export default requester;
+export const requester = new Requester(baseURL);

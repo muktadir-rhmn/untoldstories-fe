@@ -4,16 +4,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCaretRight, faComment, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import {Link} from "@reach/router";
-import profilePaths from "../profile/ProfilePaths";
-import time from "../lib/time";
+import {profilePaths} from "../profile/ProfilePaths";
+import {time} from "../lib/time";
 import {Reaction, StoryPrivacy} from "../apis/backendConstants";
-import storyPaths from "./StoryPaths";
-import storyAPI from "../apis/StoryAPI";
-import UpdateStory from "./UpdateStory";
-import userManager from "../user/UserManager";
-import FacebookSharer from "./FacebookSharer";
+import {storyPaths} from "./StoryPaths";
+import {storyAPI} from "../apis/StoryAPI";
+import {UpdateStory} from "./UpdateStory";
+import {userManager} from "../user/UserManager";
+import {FacebookSharer} from "./FacebookSharer";
 
-class Story extends React.Component{
+export class Story extends React.Component{
     constructor(props)  {
         super(props);
 
@@ -176,5 +176,3 @@ class Story extends React.Component{
         });
     }
 }
-
-export default Story;

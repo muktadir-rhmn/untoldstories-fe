@@ -1,11 +1,11 @@
 import React from 'react';
-import Comment from "./Comment";
-import ReplyBox from "./ReplyBox";
-import replyAPI from "../apis/ReplyAPI";
-import ProcessingStatus from "../controls/ProcessingStatus";
-import Reply from "./Reply";
+import {Comment} from "./Comment";
+import {ReplyBox} from "./ReplyBox";
+import {replyAPI} from "../apis/ReplyAPI";
+import {ProcessingStatus} from "../controls/ProcessingStatus";
+import {Reply} from "./Reply";
 
-class CommentWithReplies extends React.Component{
+export class CommentWithReplies extends React.Component{
     constructor(props)  {
         super(props);
 
@@ -67,5 +67,3 @@ class CommentWithReplies extends React.Component{
         return <Reply key={reply.id} reply={reply} commentID={this.props.comment.id}/>;
     }
 }
-
-export default CommentWithReplies;

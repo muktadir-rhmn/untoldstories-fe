@@ -1,6 +1,6 @@
-import requester from "../lib/requester";
+import {requester} from "../lib/requester";
 
-const commentAPI = {
+export const commentAPI = {
     add: (storyID, body) => {
         const path = `/comments`;
         const data = {
@@ -59,5 +59,3 @@ const commentAPI = {
         return requester.get(path, queryParams);
     },
 }
-
-export default commentAPI;

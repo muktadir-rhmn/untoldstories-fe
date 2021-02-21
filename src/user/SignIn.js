@@ -1,10 +1,10 @@
 import React from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
-import userAPI from "../apis/UserAPI";
-import userManager from "./UserManager";
-import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
+import {userAPI} from "../apis/UserAPI";
+import {userManager} from "./UserManager";
+import {ProcessButton, ProcessingButtonStatus} from "../controls/ProcessButton";
 
-class SignIn extends React.Component {
+export class SignIn extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -95,5 +95,3 @@ class SignIn extends React.Component {
     }
 
 }
-
-export default SignIn;

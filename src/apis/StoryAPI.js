@@ -1,15 +1,6 @@
-import requester from "../lib/requester";
+import {requester} from "../lib/requester";
 
-const storyAPI = {
-    getNewsFeedStories: function (pageNo, pageSize) {
-        const path = "/stories";
-        const query = {
-            pageNo: pageNo,
-            pageSize: pageSize,
-        }
-
-        return requester.get(path, query);
-    },
+export const storyAPI = {
 
     fetchStoriesOfAUser: function (userID, pageNo, pageSize) {
         const path = "/stories";
@@ -66,5 +57,3 @@ const storyAPI = {
         return requester.delete(path);
     }
 }
-
-export default storyAPI;

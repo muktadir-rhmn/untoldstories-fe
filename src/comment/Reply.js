@@ -1,14 +1,14 @@
 import React from 'react';
 import {Alert, Card, Dropdown, DropdownButton} from "react-bootstrap";
 import {Link} from "@reach/router";
-import profilePaths from "../profile/ProfilePaths";
-import time from "../lib/time";
+import {profilePaths} from "../profile/ProfilePaths";
+import {time} from "../lib/time";
 import {Reaction} from "../apis/backendConstants";
-import replyAPI from "../apis/ReplyAPI";
-import ReactionControl from "./ReactionControl";
-import userManager from "../user/UserManager";
+import {replyAPI} from "../apis/ReplyAPI";
+import {ReactionControl} from "./ReactionControl";
+import {userManager} from "../user/UserManager";
 
-class Reply extends React.Component {
+export class Reply extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -104,5 +104,3 @@ class Reply extends React.Component {
     }
 
 }
-
-export default Reply;

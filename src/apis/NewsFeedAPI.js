@@ -1,6 +1,6 @@
-import requester from "../lib/requester";
+import {requester} from "../lib/requester";
 
-const newsfeedAPI = {
+export const newsfeedAPI = {
     fetchStories: (pageNo) => {
         const path = "/newsfeed";
         const queryParams = {
@@ -10,5 +10,3 @@ const newsfeedAPI = {
         return requester.get(path, queryParams);
     }
 }
-
-export default newsfeedAPI;

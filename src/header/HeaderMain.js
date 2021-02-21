@@ -1,11 +1,11 @@
 import React from 'react';
 import {Button, Nav, Navbar} from "react-bootstrap";
 import {Link} from "@reach/router";
-import userManager from "../user/UserManager";
-import userPaths from "../user/UserPaths";
-import profilePaths from "../profile/ProfilePaths";
+import {userManager} from "../user/UserManager";
+import {userPaths} from "../user/UserPaths";
+import {profilePaths} from "../profile/ProfilePaths";
 
-class HeaderMain extends React.Component {
+export class MainHeader extends React.Component {
     constructor(props)  {
         super(props);
 
@@ -53,5 +53,3 @@ class HeaderMain extends React.Component {
         window.location.href = userPaths.signIn();
     }
 }
-
-export default HeaderMain;
