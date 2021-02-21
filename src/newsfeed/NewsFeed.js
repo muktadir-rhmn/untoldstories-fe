@@ -31,7 +31,7 @@ class NewsFeed extends React.Component {
 
                     </Col>
                     <Col md="6">
-                        <NewStory globalContext={this.props.globalContext}/>
+                        <NewStory/>
 
                         {storiesUI}
 

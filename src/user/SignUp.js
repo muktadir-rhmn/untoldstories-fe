@@ -2,8 +2,8 @@ import React from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
 import userManager from "./UserManager";
 import userAPI from "../apis/UserAPI";
-import NotificationTypes from "../notifier/notificationTypes";
 import ProcessButton, {ProcessingButtonStatus} from "../controls/ProcessButton";
+import Message, {generateMessage, MessageType} from "../controls/Message";
 
 class SignUp extends React.Component{
     constructor(props)  {
@@ -18,6 +18,7 @@ class SignUp extends React.Component{
                 value: "",
                 error: ""
             },
+            combinedMessage: null,
             processingStatus: ProcessingButtonStatus.IDLE,
         };
     }
@@ -33,6 +34,7 @@ class SignUp extends React.Component{
                 <Row>
                     <Col className="mx-auto text-center">
                         <h1>Sign Up</h1>
+                        <Message message={this.state.combinedMessage}/>
                     </Col>
                 </Row>
                 <br/>
@@ -75,10 +77,10 @@ class SignUp extends React.Component{
         this.setState({processingStatus: ProcessingButtonStatus.PROCESSING});
 
         userAPI.signUp(this.state.userName.value, this.state.password.value)
-            .then(res => {
-                this.props.globalContext.showNotification(NotificationTypes.INFO, "SignUp Successful. You may sign in");
+            .then(() => {
                 this.setState({
                     processingStatus: ProcessingButtonStatus.DONE,
+                    combinedMessage: generateMessage(MessageType.SUCCESS, "Sign up successful. You may sign in now."),
                 })
             })
             .catch(error => {
@@ -92,10 +94,13 @@ class SignUp extends React.Component{
                     password: {
                         value: this.state.password.value,
                         error: error.password ? error.password : "",
-                    }
+                    },
+                    combinedMessage: null,
                 });
 
-            }).finally(() => this.setState({processingStatus: ProcessingButtonStatus.IDLE}));
+            }).finally(() => this.setState({
+                processingStatus: ProcessingButtonStatus.IDLE,
+            }));
     }
 }
 

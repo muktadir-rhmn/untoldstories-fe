@@ -6,7 +6,7 @@ import LandingPage from "./landing_page/LandingPage";
 class Home extends React.Component {
 
     render() {
-        if (userManager.isSignedIn()) return <NewsFeed globalContext={this.globalContext}/>;
+        if (userManager.isSignedIn()) return <NewsFeed/>;
         else return <LandingPage/>;
     }
 }

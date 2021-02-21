@@ -1,6 +1,6 @@
 import userManager from "../user/UserManager";
 import {baseURL, ErrorResponseID} from "../apis/backendConstants";
-import NotificationTypes from "../notifier/notificationTypes";
+import {MessageType} from "../controls/Message";
 
 const RESPONSE_STATUS_CODE = {
     OK: 200,
@@ -12,7 +12,7 @@ class Requester {
     constructor(baseURL) {
         this.baseURL = baseURL;
     }
-    setPushNotify(pushNotify) {
+    setMessage(pushNotify) {
         this._pushNotify = pushNotify;
     }
 
@@ -95,7 +95,7 @@ class Requester {
     }
 
     showErrorMessage(message) {
-        if (this._pushNotify) this._pushNotify(NotificationTypes.ERROR, message);
+        if (this._pushNotify) this._pushNotify(MessageType.ERROR, message);
         else console.error("Notifier not setup for Requester. So, the user won't see the message: ", message);
     }
 }

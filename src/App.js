@@ -5,56 +5,27 @@ import {Router} from "@reach/router";
 import HeaderMain from "./header/HeaderMain";
 import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
-import Notifier from "./notifier/Notifier";
 import requester from "./lib/requester";
 import Profile from "./profile/Profile";
 import FullStory from "./story/FullStory";
 import Home from "./Home";
+import Message, {generateMessage} from "./controls/Message";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            notifier: {
-                nextNotificationID: 0,
-                notifications: [],
-            },
-        }
+            message: null,
+        };
 
-        this.globalContext = {
-            showNotification: (type, message) => this.showNotification(type, message),
-        }
-        Object.freeze(this.globalContext);
-
-        requester.setPushNotify((type, message) => this.showNotification(type, message));
+        requester.setMessage((type, body) => this.showGlobalMessage(type, body));
     }
 
-    showNotification(type, message) {
-        const notificationID = this.state.notifier.nextNotificationID++;
-        this.state.notifier.notifications.push({id: notificationID, type: type, message: message});
-
-        this.setState({});
-    }
-
-    removeNotification(notificationIDToRemove) {
-        const notifications = this.state.notifier.notifications;
-
-        let indexToRemove = null;
-        for(let i = 0; i < notifications.length; i++) {
-            if (notifications[i].id === notificationIDToRemove) {
-                indexToRemove = i;
-                break;
-            }
-        }
-
-        if (indexToRemove === null) {
-            console.error("Bug! push notification with id", notificationIDToRemove, "not found for removal");
-            return;
-        }
-
-        notifications.splice(indexToRemove, 1);
-        this.setState({});
+    showGlobalMessage(type, body) {
+        this.setState({
+            message: generateMessage(type, body),
+        });
     }
 
     render() {
@@ -62,13 +33,13 @@ class App extends React.Component {
             <div className={"App"}>
                 <HeaderMain/>
                 <br/>
-                <Notifier notifications={this.state.notifier.notifications} removeNotification={id => this.removeNotification(id)}/>
+                <Message message={this.state.message} />
                 <Router>
                     <SignIn path="/signin"/>
-                    <SignUp path="/signup" globalContext={this.globalContext}/>
-                    <Home path="/" globalContext={this.globalContext}/>
+                    <SignUp path="/signup" />
+                    <Home path="/" />
                     <Profile path="/profile/:userID"/>
-                    <FullStory path="/story/:storyID" globalContext={this.globalContext}/>
+                    <FullStory path="/story/:storyID"/>
                 </Router>
             </div>
         );

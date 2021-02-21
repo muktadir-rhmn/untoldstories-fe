@@ -42,7 +42,7 @@ class FullStory extends React.Component{
                     </Col>
                     <Col md="6">
                         <Story story={this.state.story} />
-                        <CommentSection storyID={this.state.story.id} globalContext={this.props.globalContext}/>
+                        <CommentSection storyID={this.state.story.id}/>
                     </Col>
                     <Col md="3">
 
