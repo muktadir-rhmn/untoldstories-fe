@@ -5,7 +5,7 @@ export const MessageType = {
     INFO: "info",
     SUCCESS:"success",
     ERROR: "danger",
-}
+};
 
 export function generateMessage(type, body=null) {
     return {

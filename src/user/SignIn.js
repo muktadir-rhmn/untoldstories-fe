@@ -87,7 +87,11 @@ class SignIn extends React.Component {
                     },
                 });
 
-            }).finally(() => this.setState({processingStatus: ProcessingButtonStatus.IDLE}));
+            }).finally(
+                () => this.setState({
+                    processingStatus: ProcessingButtonStatus.IDLE
+                })
+            );
     }
 
 }

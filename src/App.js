@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Router} from "@reach/router";
-import HeaderMain from "./header/HeaderMain";
+import MainHeader from "./header/HeaderMain";
 import SignIn from "./user/SignIn";
 import SignUp from "./user/SignUp";
 import requester from "./lib/requester";
@@ -31,13 +31,13 @@ class App extends React.Component {
     render() {
         return (
             <div className={"App"}>
-                <HeaderMain/>
+                <MainHeader/>
                 <br/>
                 <Message message={this.state.message} />
                 <Router>
                     <SignIn path="/signin"/>
-                    <SignUp path="/signup" />
-                    <Home path="/" />
+                    <SignUp path="/signup"/>
+                    <Home path="/"/>
                     <Profile path="/profile/:userID"/>
                     <FullStory path="/story/:storyID"/>
                 </Router>
