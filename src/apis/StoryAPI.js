@@ -2,7 +2,7 @@ import {requester} from "../lib/requester";
 
 export const storyAPI = {
 
-    fetchStoriesOfAUser: function (userID, pageNo, pageSize) {
+    fetchStoriesOfAUser(userID, pageNo, pageSize) {
         const path = "/stories";
         const query = {
             userID: userID,
@@ -13,13 +13,13 @@ export const storyAPI = {
         return requester.get(path, query);
     },
 
-    fetchStory: function (storyID) {
+    fetchStory(storyID) {
         const path = `/stories/${storyID}`;
 
         return requester.get(path);
     },
 
-    addNew: function (body, privacy) {
+    addNew(body, privacy) {
         const path = "/stories";
         const data = {
             body: body,
@@ -29,7 +29,7 @@ export const storyAPI = {
         return requester.post(path, data);
     },
 
-    update: function (storyID, newBody, newPrivacy) {
+    update(storyID, newBody, newPrivacy) {
         const path = `/stories/${storyID}`;
         const data = {
             body: newBody,
@@ -39,19 +39,19 @@ export const storyAPI = {
         return requester.put(path, data);
     },
 
-    delete: function (storyID) {
+    delete(storyID) {
         const path = `/stories/${storyID}`;
 
         return requester.delete(path);
     },
 
-    like: function (storyID) {
+    like(storyID) {
         const path = `/stories/${storyID}/like`;
 
         return requester.post(path);
     },
 
-    unlike: function (storyID) {
+    unlike(storyID) {
         const path = `/stories/${storyID}/reactions`;
 
         return requester.delete(path);

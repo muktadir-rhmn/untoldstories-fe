@@ -1,7 +1,7 @@
 import {requester} from "../lib/requester";
 
 export const commentAPI = {
-    add: (storyID, body) => {
+    add(storyID, body) {
         const path = `/comments`;
         const data = {
             storyID: storyID,
@@ -11,7 +11,7 @@ export const commentAPI = {
         return requester.post(path, data);
     },
 
-    update: (commentID, body) => {
+    update(commentID, body) {
         const path = `/comments/${commentID}`;
         const data = {
             body: body
@@ -20,13 +20,13 @@ export const commentAPI = {
         return requester.put(path, data);
     },
 
-    delete: (commentID) => {
+    delete(commentID) {
         const path = `/comments/${commentID}`;
 
         return requester.delete(path);
     },
 
-    like: (storyID, commentID) => {
+    like(storyID, commentID) {
         const path = `/comments/${commentID}/like`;
         const data = {
             storyID: storyID,
@@ -35,7 +35,7 @@ export const commentAPI = {
         return requester.post(path, data);
     },
 
-    dislike: (storyID, commentID) => {
+    dislike(storyID, commentID) {
         const path = `/comments/${commentID}/dislike`;
         const data = {
             storyID: storyID,
@@ -44,13 +44,13 @@ export const commentAPI = {
         return requester.post(path, data);
     },
 
-    deleteReaction: (commentID) => {
+    deleteReaction(commentID) {
         const path = `/comments/${commentID}/reactions`;
 
         return requester.delete(path);
     },
 
-    fetchCommentsOfStory: (storyID) => {
+    fetchCommentsOfStory(storyID) {
         const path = `/comments`;
         const queryParams = {
             storyID: storyID

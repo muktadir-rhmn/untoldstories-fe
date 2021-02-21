@@ -1,3 +1,5 @@
 export const profilePaths = {
-    timeline: (userID) => `/profile/${userID}`,
+    timeline(userID) {
+        return `/profile/${userID}`
+    }
 }

@@ -1,3 +1,6 @@
 export const storyPaths = {
-    fullStory: (storyID) => `/story/${storyID}`
+    fullStory(storyID) {
+        return `/story/${storyID}`;
+    }
+
 }

@@ -1,4 +1,4 @@
 export const userPaths = {
-    signIn: () => "/signin",
-    signUp: () => "/signup",
+    signIn() {return "/signin"},
+    signUp() {return "/signup"},
 }

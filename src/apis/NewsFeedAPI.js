@@ -1,7 +1,7 @@
 import {requester} from "../lib/requester";
 
 export const newsfeedAPI = {
-    fetchStories: (pageNo) => {
+    fetchStories(pageNo) {
         const path = "/newsfeed";
         const queryParams = {
             pageNo: pageNo

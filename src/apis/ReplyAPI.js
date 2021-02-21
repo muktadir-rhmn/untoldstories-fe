@@ -1,7 +1,7 @@
 import {requester} from "../lib/requester";
 
 export const replyAPI = {
-    add: (storyID, commentID, body) => {
+    add(storyID, commentID, body) {
         const path = `/replies`;
         const data = {
             storyID: storyID,
@@ -12,7 +12,7 @@ export const replyAPI = {
         return requester.post(path, data);
     },
 
-    update: (replyID, body) => {
+    update(replyID, body) {
         const path = `/replies/${replyID}`;
         const data = {
             body: body
@@ -21,13 +21,13 @@ export const replyAPI = {
         return requester.put(path, data);
     },
 
-    delete: (replyID) => {
+    delete(replyID) {
         const path = `/replies/${replyID}`;
 
         return requester.delete(path);
     },
 
-    like: (commentID, replyID) => {
+    like(commentID, replyID) {
         const path = `/replies/${replyID}/like`;
         const data = {
             commentID: commentID,
@@ -36,7 +36,7 @@ export const replyAPI = {
         return requester.post(path, data);
     },
 
-    dislike: (commentID, replyID) => {
+    dislike(commentID, replyID) {
         const path = `/replies/${replyID}/dislike`;
         const data = {
             commentID: commentID,
@@ -45,7 +45,7 @@ export const replyAPI = {
         return requester.post(path, data);
     },
 
-    deleteReaction: (replyID) => {
+    deleteReaction(replyID) {
         const path = `/replies/${replyID}/reactions`;
 
         return requester.delete(path);

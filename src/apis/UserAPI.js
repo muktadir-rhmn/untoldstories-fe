@@ -1,7 +1,7 @@
 import {requester} from "../lib/requester";
 
 export const userAPI = {
-    signIn: (userName, password) => {
+    signIn(userName, password) {
         const path = "/users/signin";
         const data = {
             userName: userName,
@@ -11,7 +11,7 @@ export const userAPI = {
         return requester.post(path, data);
     },
 
-    signUp: (userName, password) => {
+    signUp(userName, password) {
         const path = "/users/signup";
         const data = {
             userName: userName,
@@ -21,7 +21,7 @@ export const userAPI = {
         return requester.post(path, data);
     },
 
-    fetchUserData: (userID) => {
+    fetchUserData(userID) {
         const path = `/users/${userID}`;
 
         return requester.get(path);
